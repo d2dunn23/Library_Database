@@ -1,0 +1,109 @@
+﻿CREATE DATABASE librarycatalog;
+
+
+CREATE TABLE Users(
+        email VARCHAR(32) PRIMARY KEY,
+        name VARCHAR(32),
+        password Char(32)
+);
+
+
+CREATE TABLE Admins(
+        email VARCHAR(32) PRIMARY KEY,
+        name VARCHAR(32),
+        password Char(32)
+);
+
+
+CREATE TABLE Authors(
+        authorid VARCHAR(8) PRIMARY KEY,
+        fname VARCHAR(32),
+        lname VARCHAR(32)
+);
+
+
+CREATE TABLE Books(
+        isbn VARCHAR(16) PRIMARY KEY,
+        title VARCHAR(32),
+        pagecount INT,
+        available boolean DEFAULT true
+);
+
+
+CREATE TABLE Writtenby(
+        isbn VARCHAR(16),
+        authorid VARCHAR(8),
+        Pubdate date,
+        PRIMARY KEY (authorid, isbn),
+        FOREIGN KEY (authorid) REFERENCES Authors(authorid),
+        FOREIGN KEY (isbn) REFERENCES Books(isbn)
+);
+
+
+CREATE TABLE Reservedby(
+        email VARCHAR(32),
+        isbn VARCHAR(16),
+        Resdate date,
+        PRIMARY KEY(email,isbn),
+        FOREIGN KEY (email) REFERENCES Users(email),
+        FOREIGN KEY (isbn) REFERENCES Books(isbn)
+);
+
+
+INSERT INTO Authors
+VALUES('AA1000','JK’, ‘Rowling');
+INSERT INTO Authors
+VALUES('BB2000','Stephen’, ‘King');
+INSERT INTO Authors
+VALUES('CC3000','James’, ‘Patterson');
+INSERT INTO Authors
+VALUES('DD4000','Jane’, ‘Austen');
+INSERT INTO Authors
+VALUES('EE5000','JRR’, ‘Tolkien');
+
+
+INSERT INTO books
+VALUES('9780545791427','Harry Potter book 4', 464, 1);
+INSERT INTO books
+VALUES('9781338299168','Harry Potter book 3', 464, 1);
+INSERT INTO books
+VALUES('9781982115982','Pet Sematary', 416, 1);
+INSERT INTO books
+VALUES('9781501142970','It', 1168, 1);
+INSERT INTO books
+VALUES('9780316526883','Criss Cross', 400, 1);
+INSERT INTO books
+VALUES('9780316453301','The Chef', 400, 1);
+INSERT INTO books
+VALUES('9781435159631','Pride and Prejudice', 368, 1);
+INSERT INTO books
+VALUES('9781593081256','Sense and Sensibility', 352, 1);
+INSERT INTO books
+VALUES('9780547928227','The Hobbit', 320, 1);
+INSERT INTO books
+VALUES('9780544338012','The Silmarillion', 384, 1)
+
+
+INSERT INTO writtenby
+VALUES('9780545791427','AA1000','2000-07-08');
+INSERT INTO writtenby
+VALUES('9781338299168','AA1000','1999-07-08');
+INSERT INTO writtenby
+VALUES('9781982115982','BB2000','1983-02-23');
+INSERT INTO writtenby
+VALUES('9781501142970','BB2000','1985-09-15');
+INSERT INTO writtenby
+VALUES('9780316453301','CC3000','2019-02-18');
+INSERT INTO writtenby
+VALUES('9781780899442','CC3000','2019-11-14');
+INSERT INTO writtenby
+VALUES('9781435159631','DD4000','1791-10-10');
+INSERT INTO writtenby
+VALUES('9781593081256','DD4000','1797-08-22');
+INSERT INTO writtenby
+VALUES('9780547928227','EE5000','1937-09-21');
+INSERT INTO writtenby
+VALUES('9780544338012','EE5000','1977-09-15');
+
+
+Users are all created via register.php, and admins are all created via adminregister.php

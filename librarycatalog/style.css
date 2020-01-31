@@ -1,0 +1,27 @@
+body {
+	font-family: Arial;
+	color: #ffffff;
+	background-color: #000000;
+	font-size: 0.9em;
+}
+
+.pagenote {
+	background-color: #ffffff;
+	color: #000000;
+	margin: 2%;
+	padding: 2%
+}
+
+.centered {
+	text-align: center;
+}
+
+h1, h2{
+    margin-top: 0;
+}
+
+.beta td {
+/* border-top: 1px solid black;
+border-left: 1px solid black; */
+padding:8px 20px 8px 20px;
+}
